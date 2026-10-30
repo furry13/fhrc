@@ -10,7 +10,7 @@ date:
 consensus: true
 v: 3
 area: AREA
-workgroup: IPv6 Operations Working Group
+workgroup: "IPv6 Operations Working Group"
 keyword:
  - ipv6
  - nd
