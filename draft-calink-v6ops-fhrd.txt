@@ -2,14 +2,15 @@
 
 
 
-WG Working Group                                              Y. N. Here
-Internet-Draft                                    Your Organization Here
-Intended status: Informational                           30 October 2026
-Expires: 3 May 2027
+IPv6 Operations Working Group                                 O. Caletka
+Internet-Draft                                                  RIPE NCC
+Intended status: Informational                                J. Linkova
+Expires: 3 May 2027                                          Google, LLC
+                                                         30 October 2026
 
 
-                           TODO - Your title
-                  draft-todo-yourname-protocol-latest
+   First Hop Redundancy in IPv6 Networks: Operational Considerations
+                     draft-calink-v6ops-fhrd-latest
 
 Abstract
 
@@ -19,17 +20,16 @@ About This Document
 
    This note is to be removed before publishing as an RFC.
 
-   The latest revision of this draft can be found at
-   https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-todo-yourname-
-   protocol/.
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-calink-v6ops-fhrd/.
 
-   Discussion of this document takes place on the WG Working Group
-   mailing list (mailto:WG@example.com), which is archived at
-   https://example.com/WG.
+   Discussion of this document takes place on the IPv6 Operations
+   Working Group mailing list (mailto:v6ops@ietf.org), which is archived
+   at https://mailarchive.ietf.org/arch/browse/v6ops/.  Subscribe at
+   https://www.ietf.org/mailman/listinfo/v6ops/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/USER/REPO.
+   https://github.com/furry13/fhrc.
 
 Status of This Memo
 
@@ -70,7 +70,7 @@ Table of Contents
    4.  IANA Considerations
    5.  Normative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -107,8 +107,13 @@ Acknowledgments
 
    TODO acknowledge.
 
-Author's Address
+Authors' Addresses
 
-   Your Name Here
-   Your Organization Here
-   Email: your.email@example.com
+   Ondrej Caletka
+   RIPE NCC
+   Email: ondrej.caletka@ripe.net
+
+
+   Jen Linkova
+   Google, LLC
+   Email: furry13@gmail.com
