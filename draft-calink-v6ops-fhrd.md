@@ -4,12 +4,12 @@ abbrev: "v6fhr"
 category: info
 
 docname: draft-calink-v6ops-fhrd-latest
-submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
+submissiontype: IETF
 number:
 date:
 consensus: true
 v: 3
-area: AREA
+area: "Operations and Management"
 workgroup: "IPv6 Operations Working Group"
 keyword:
  - ipv6
