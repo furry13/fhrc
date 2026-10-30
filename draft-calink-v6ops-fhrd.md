@@ -19,36 +19,40 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "First Hop Redundancy in IPv6 Networks: Operational Considerations"
+abbrev: "v6fhr"
 category: info
 
-docname: draft-todo-yourname-protocol-latest
+docname: draft-calink-v6ops-fhrd-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
 consensus: true
 v: 3
 area: AREA
-workgroup: WG Working Group
+workgroup: IPv6 Operations Working Group
 keyword:
- - next generation
- - unicorn
- - AI-native
+ - ipv6
+ - nd
+ - vrrp
+ - ra
 venue:
-  group: WG
-  type: Working Group
-  mail: WG@example.com
-  arch: https://example.com/WG
-  github: USER/REPO
-  latest: https://example.com/LATEST
+  group: "IPv6 Operations"
+  type: "Working Group"
+  mail: v6ops@ietf.org
+  github: furry13/fhrc
+  arch: "https://mailarchive.ietf.org/arch/browse/v6ops/"
 
 author:
  -
-    fullname: Your Name Here
-    organization: Your Organization Here
-    email: your.email@example.com
-
+    fullname: "Ondrej Caletka"
+    organization: RIPE NCC
+    email: ondrej.caletka@ripe.net
+-
+    fullname: Jen Linkova
+    organization: Google, LLC
+    email: furry13@gmail.com
+    
 normative:
 
 informative:
