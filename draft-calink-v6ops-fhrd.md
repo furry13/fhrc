@@ -25,9 +25,10 @@ venue:
 
 author:
  -
-    fullname: "Ondrej Caletka"
+    fullname: Ondrej Caletka
     organization: RIPE NCC
     email: ondrej.caletka@ripe.net
+    
 -
     fullname: Jen Linkova
     organization: Google, LLC
