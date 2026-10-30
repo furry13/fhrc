@@ -28,12 +28,12 @@ author:
     fullname: Ondrej Caletka
     organization: RIPE NCC
     email: ondrej.caletka@ripe.net
-    
--
+
+ -
     fullname: Jen Linkova
     organization: Google, LLC
     email: furry13@gmail.com
-    
+
 normative:
 
 informative:
