@@ -10,7 +10,7 @@ date:
 consensus: true
 v: 3
 area: "Operations and Management"
-workgroup: "IPv6 Operations Working Group"
+workgroup: "IPv6 Operations"
 keyword:
  - ipv6
  - nd
@@ -19,8 +19,8 @@ keyword:
 venue:
   group: "IPv6 Operations"
   type: "Working Group"
-  mail: v6ops@ietf.org
-  github: furry13/fhrc
+  mail: "v6ops@ietf.org"
+  github: "furry13/fhrc"
   arch: "https://mailarchive.ietf.org/arch/browse/v6ops/"
 
 author:
