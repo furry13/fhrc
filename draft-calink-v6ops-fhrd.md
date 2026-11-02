@@ -51,6 +51,7 @@ informative:
 
 --- abstract
 
+
 This document provides operational guidance for configuring first-hop routers and first-hop redundancy in IPv6 networks. It also discusses design choices for improving recovery time after a renumbering event.
 
 
@@ -83,7 +84,7 @@ If the administrator requires all hosts to use the same router, the following me
 The main disadvantace of this approach is time to recover: a host would only switch to another default router from the list after the Nighbor Unreachability Detection (NUD, {{RFC4861}}) marks the router as unreachable.
 The default value would be (without taking randomisation factors into account): ReachableTime milliseconds (to move from REACHABLE to STALE) + DELAY_FIRST_PROBE_TIME + MAX_UNICAST_SOLICIT*RetransTimer = 30 seconds + 5 second + 3*1 = 38 seconds.
 
-Since the timers are configured locally on each host, it is not possible to influence them from the network side. It is namely not possible to achieve shorter failover time by shortening the Router Lifetime of the active router to a very low value. Not only that leads to frequent sending of Router Advertisements, which has an impact on battery-powered devices {{RFC7772}}, some operating systems are known to ignore routers announced with a very short lifetime.
+Since those timers timers are protocol constant (see Section 10 of {{RFC4861}} or vary from one host operating system ti another, it is not possible to influence them from the network side. It is namely not possible to achieve shorter failover time by shortening the Router Lifetime of the active router to a very low value. Not only that leads to frequent sending of Router Advertisements, which has an impact on battery-powered devices {{RFC7772}}, some operating systems are known to ignore routers announced with a very short lifetime.
 
 
 ## Virtual Router Redundancy Protocol (VRRP) or Similar Protocols
