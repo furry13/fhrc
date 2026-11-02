@@ -73,7 +73,7 @@ Table of Contents
      3.2.  Virtual Router Redundancy Protocol (VRRP) or Similar
            Protocols
      3.3.  Anycast Default Gateway
-     3.4.  Routing to a Host
+     3.4.  Routing return traffic back to Hosts
    4.  Timers
    5.  Host Mobility and Renumbering Evens
    6.  Security Considerations
@@ -86,9 +86,19 @@ Table of Contents
 
 1.  Introduction
 
-   First-hop routers face hosts and provide hosts with information to
-   configure hosts IPv6 stack via StateLess Address AutoConfiguration,
-   SLAAC [RFC4861].
+   Unlike IPv4, the IPv6 protocol supports operation with multiple
+   gateways as a native part of the Neigbor Discovery Protocol
+   [RFC4861].  On the other hand, first hop redundancy protocols used in
+   IPv4 like Virtual Router Redundancy Protocol [RFC9568] can be used
+   for IPv6 as well, making the redundant gateways appear as a single
+   logical gateway.
+
+   This document discusses different options for deploying redundant
+   first-hop IPv6 gateways to ensure high availability and compatibility
+   with various client implementations.  First-hop routers face hosts
+   and provide them with information to configure routing as well as
+   well other network parameters, including but not limited to stateless
+   address autoconfiguration, SLAAC [RFC4862].
 
 2.  Conventions and Definitions
 
@@ -128,13 +138,25 @@ Table of Contents
    MAX_UNICAST_SOLICIT_RetransTimer = 30 seconds + 5 second + 3_1 = 38
    seconds.
 
+   Since the timers are configured locally on each host, it is not
+   possible to influence them from the network side.  It is namely not
+   possible to achieve shorter failover time by shortening the Router
+   Lifetime of the active router to a very low value.  Not only that
+   leads to frequent sending of Router Advertisements, which has an
+   impact on battery-powered devices [RFC7772], some operating systems
+   are known to ignore routers announced with a very short lifetime.
+
 3.2.  Virtual Router Redundancy Protocol (VRRP) or Similar Protocols
 
    VRRPv3 [RFC9568] specifies an election protocol that dynamically
    assigns responsibility for a Virtual Router to one of the VRRP
    Routers on a LAN.  A Virtual Router has one or more dedicated virtual
    IPv6 addresses and a virtual MAC address.  Hosts are provided with
-   the virtual IPv6 address as the default router via SLAAC.
+   the virtual IPv6 address as the default router via Router
+   Advertisements.  Since the hosts only see a single high available
+   logical gateway, the solution is also useful for hosts with broken
+   IPv6 stacks which cannot correctly process Router Advertisements from
+   multiple independent routers.
 
    Section 1.4 of [RFC9568] compares convergence time between NUD (as
    discussed in the section above) and VRRPv3.  Using VRRPv3 default
@@ -147,16 +169,29 @@ Table of Contents
    Virtual MAC (VMAC) address across multiple first-hop routers attached
    to the same broadcast domain or overlay network (e.g., EVPN-VXLAN).
 
-   Hosts configure that IPv6 address as a default router via SLAAC.
-   Because every participating router concurrently processes and
-   forwards first-hop ingress traffic, this approach provides active-
-   active first-hop redundancy and multi-path forwarding.  In the event
-   of a router failure, convergence is dictated solely by local physical
-   link-down detection or underlying L2/L3 topology reconvergence.
+   Similarly to the previous solution, hosts will configure a single
+   high available logical gateway using Router Advertisements.  Because
+   every participating router concurrently processes and forwards first-
+   hop ingress traffic, this approach provides active-active first-hop
+   redundancy and multi-path forwarding.  In the event of a router
+   failure, convergence is dictated solely by local physical link-down
+   detection or underlying L2/L3 topology reconvergence.
 
-3.4.  Routing to a Host
+3.4.  Routing return traffic back to Hosts
 
-   TODO: add text
+   All redundant gateways must correctly forward packets destined to the
+   subnet where the hosts are connected, usually by means of an Internal
+   Gateway Protocol (IGP).  By default, this can lead to a routing
+   asymmetry where return traffic uses a different gateway than the
+   forward traffic.  This is not a problem, unless some stateful
+   processing like firewall rules or connection tracking takes place on
+   the gateways.
+
+   If routing asymmetry is not desirable and gateways are operated in
+   active-standby mode, symmetric routing can be achieved by influencing
+   the route metric of the active gateway announced in the IGP together
+   with virtual IP/MAC address failover so that the currently active
+   gateway will provide a more preferred route for the return path.
 
 4.  Timers
 
@@ -207,6 +242,16 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc9568>.
 
 8.2.  Informative References
+
+   [RFC4862]  Thomson, S., Narten, T., and T. Jinmei, "IPv6 Stateless
+              Address Autoconfiguration", RFC 4862,
+              DOI 10.17487/RFC4862, September 2007,
+              <https://www.rfc-editor.org/rfc/rfc4862>.
+
+   [RFC7772]  Yourtchenko, A. and L. Colitti, "Reducing Energy
+              Consumption of Router Advertisements", BCP 202, RFC 7772,
+              DOI 10.17487/RFC7772, February 2016,
+              <https://www.rfc-editor.org/rfc/rfc7772>.
 
    [RFC8475]  Linkova, J. and M. Stucchi, "Using Conditional Router
               Advertisements for Enterprise Multihoming", RFC 8475,

@@ -1168,7 +1168,7 @@ svg {
                 <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-anycast-default-gateway" class="internal xref">Anycast Default Gateway</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-routing-to-a-host" class="internal xref">Routing to a Host</a></p>
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-routing-return-traffic-back" class="internal xref">Routing return traffic back to Hosts</a></p>
 </li>
             </ul>
 </li>
@@ -1210,7 +1210,8 @@ svg {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">First-hop routers face hosts and provide hosts with information to configure hosts IPv6 stack via StateLess Address AutoConfiguration, SLAAC <span>[<a href="#RFC4861" class="cite xref">RFC4861</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Unlike IPv4, the IPv6 protocol supports operation with multiple gateways as a native part of the Neigbor Discovery Protocol <span>[<a href="#RFC4861" class="cite xref">RFC4861</a>]</span>. On the other hand, first hop redundancy protocols used in IPv4 like Virtual Router Redundancy Protocol <span>[<a href="#RFC9568" class="cite xref">RFC9568</a>]</span> can be used for IPv6 as well, making the redundant gateways appear as a single logical gateway.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This document discusses different options for deploying redundant first-hop IPv6 gateways to ensure high availability and compatibility with various client implementations. First-hop routers face hosts and provide them with information to configure routing as well as well other network parameters, including but not limited to stateless address autoconfiguration, SLAAC <span>[<a href="#RFC4862" class="cite xref">RFC4862</a>]</span>.<a href="#section-1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1248,6 +1249,7 @@ If multiple routers are present on a link, Section 6.3.4 of <span>[<a href="#RFC
         </ul>
 <p id="section-3.1-4">The main disadvantace of this approach is time to recover: a host would only switch to another default router from the list after the Nighbor Unreachability Detection (NUD, <span>[<a href="#RFC4861" class="cite xref">RFC4861</a>]</span>) marks the router as unreachable.
 The default value would be (without taking randomisation factors into account): ReachableTime milliseconds (to move from REACHABLE to STALE) + DELAY_FIRST_PROBE_TIME + MAX_UNICAST_SOLICIT<em>RetransTimer = 30 seconds + 5 second + 3</em>1 = 38 seconds.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">Since the timers are configured locally on each host, it is not possible to influence them from the network side. It is namely not possible to achieve shorter failover time by shortening the Router Lifetime of the active router to a very low value. Not only that leads to frequent sending of Router Advertisements, which has an impact on battery-powered devices <span>[<a href="#RFC7772" class="cite xref">RFC7772</a>]</span>, some operating systems are known to ignore routers announced with a very short lifetime.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="virtual-router-redundancy-protocol-vrrp-or-similar-protocols">
@@ -1257,7 +1259,8 @@ The default value would be (without taking randomisation factors into account): 
         </h3>
 <p id="section-3.2-1">VRRPv3 <span>[<a href="#RFC9568" class="cite xref">RFC9568</a>]</span> specifies an election protocol that dynamically assigns responsibility for a Virtual Router to one of the VRRP Routers on a LAN.
 A Virtual Router has one or more dedicated virtual IPv6 addresses and a virtual MAC address.
-Hosts are provided with the virtual IPv6 address as the default router via SLAAC.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+Hosts are provided with the virtual IPv6 address as the default router via Router Advertisements.
+Since the hosts only see a single high available logical gateway, the solution is also useful for hosts with broken IPv6 stacks which cannot correctly process Router Advertisements from multiple independent routers.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">Section 1.4 of <span>[<a href="#RFC9568" class="cite xref">RFC9568</a>]</span> compares convergence time between NUD (as discussed in the section above) and VRRPv3.
 Using VRRPv3 default parameters, a backup router can take over a failed default router in three seconds, with the switchover being transparent to hosts.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 </section>
@@ -1268,17 +1271,18 @@ Using VRRPv3 default parameters, a backup router can take over a failed default 
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-anycast-default-gateway" class="section-name selfRef">Anycast Default Gateway</a>
         </h3>
 <p id="section-3.3-1">An Anycast Default Gateway assigns the identical IPv6 address and Virtual MAC (VMAC) address across multiple first-hop routers attached to the same broadcast domain or overlay network (e.g., EVPN-VXLAN).<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">Hosts configure that IPv6 address as a default router via SLAAC.
+<p id="section-3.3-2">Similarly to the previous solution, hosts will configure a single high available logical gateway using Router Advertisements.
 Because every participating router concurrently processes and forwards first-hop ingress traffic, this approach provides active-active first-hop redundancy and multi-path forwarding.
 In the event of a router failure, convergence is dictated solely by local physical link-down detection or underlying L2/L3 topology reconvergence.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="routing-to-a-host">
+<div id="routing-return-traffic-back-to-hosts">
 <section id="section-3.4">
-        <h3 id="name-routing-to-a-host">
-<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-routing-to-a-host" class="section-name selfRef">Routing to a Host</a>
+        <h3 id="name-routing-return-traffic-back">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-routing-return-traffic-back" class="section-name selfRef">Routing return traffic back to Hosts</a>
         </h3>
-<p id="section-3.4-1">TODO: add text<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-1">All redundant gateways must correctly forward packets destined to the subnet where the hosts are connected, usually by means of an Internal Gateway Protocol (IGP). By default, this can lead to a routing asymmetry where return traffic uses a different gateway than the forward traffic. This is not a problem, unless some stateful processing like firewall rules or connection tracking takes place on the gateways.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">If routing asymmetry is not desirable and gateways are operated in active-standby mode, symmetric routing can be achieved by influencing the route metric of the active gateway announced in the IGP together with virtual IP/MAC address failover so that the currently active gateway will provide a more preferred route for the return path.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1364,6 +1368,14 @@ It inherits security considerations of IPv6 (see <span>[<a href="#RFC9099" class
 <a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="RFC4862">[RFC4862]</dt>
+        <dd>
+<span class="refAuthor">Thomson, S.</span>, <span class="refAuthor">Narten, T.</span>, and <span class="refAuthor">T. Jinmei</span>, <span class="refTitle">"IPv6 Stateless Address Autoconfiguration"</span>, <span class="seriesInfo">RFC 4862</span>, <span class="seriesInfo">DOI 10.17487/RFC4862</span>, <time datetime="2007-09" class="refDate">September 2007</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc4862">https://www.rfc-editor.org/rfc/rfc4862</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7772">[RFC7772]</dt>
+        <dd>
+<span class="refAuthor">Yourtchenko, A.</span> and <span class="refAuthor">L. Colitti</span>, <span class="refTitle">"Reducing Energy Consumption of Router Advertisements"</span>, <span class="seriesInfo">BCP 202</span>, <span class="seriesInfo">RFC 7772</span>, <span class="seriesInfo">DOI 10.17487/RFC7772</span>, <time datetime="2016-02" class="refDate">February 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7772">https://www.rfc-editor.org/rfc/rfc7772</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8475">[RFC8475]</dt>
         <dd>
 <span class="refAuthor">Linkova, J.</span> and <span class="refAuthor">M. Stucchi</span>, <span class="refTitle">"Using Conditional Router Advertisements for Enterprise Multihoming"</span>, <span class="seriesInfo">RFC 8475</span>, <span class="seriesInfo">DOI 10.17487/RFC8475</span>, <time datetime="2018-10" class="refDate">October 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8475">https://www.rfc-editor.org/rfc/rfc8475</a>&gt;</span>. </dd>
