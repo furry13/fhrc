@@ -119,7 +119,7 @@ AI: copy some text from draft-link-6man-gulla
 # Security Considerations {#security}
 
 This document does not introduce any new security considerations.
-It inherits security considerations of IPv6 (see {{RFC9099}}). 
+It inherits security considerations of IPv6 (see {{RFC9099}}).
 
 # IANA Considerations {#iana}
 
