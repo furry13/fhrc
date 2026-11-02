@@ -49,7 +49,7 @@ informative:
 
 --- abstract
 
-This document provides operational guidance for configuring first-hop routers and first-hop redundancy in IPv6 networks. It also discusses design choices for improving recovery time after a renumbering event. 
+This document provides operational guidance for configuring first-hop routers and first-hop redundancy in IPv6 networks. It also discusses design choices for improving recovery time after a renumbering event.
 
 
 --- middle
