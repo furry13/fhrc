@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-01T04:29:30.606432+00:00",
+  "timestamp": "2026-11-03T05:25:35.589324+00:00",
   "repo": "furry13/fhrc",
   "labels": [
     {
@@ -55,5 +55,236 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOVdWlq88AAAABMYeJTw",
+      "title": "00",
+      "url": "https://github.com/furry13/fhrc/pull/1",
+      "state": "MERGED",
+      "author": "furry13",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "furry13"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-11-02T19:11:04Z",
+      "updatedAt": "2026-11-02T21:48:12Z",
+      "baseRepository": "furry13/fhrc",
+      "baseRefName": "main",
+      "baseRefOid": "02a3c660cad1b383aca507be52c1948d823bbd97",
+      "headRepository": "furry13/fhrc",
+      "headRefName": "00",
+      "headRefOid": "cc884b0028724382829e8f4584f06e22ce7659fe",
+      "closedAt": "2026-11-02T21:48:12Z",
+      "mergedAt": "2026-11-02T21:48:12Z",
+      "mergedBy": "furry13",
+      "mergeCommit": {
+        "oid": "eb5c94a076165cd7d2ff031a0bfa19ecb7adf23a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOVdWlq88AAAABVj8Cpg",
+          "commit": {
+            "abbreviatedOid": "e41ebd8"
+          },
+          "author": "github-actions",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-02T19:11:34Z",
+          "updatedAt": "2026-11-02T19:11:34Z",
+          "comments": [
+            {
+              "originalPosition": 92,
+              "body": "````suggestion\nIt inherits security considerations of IPv6 (see {{RFC9099}}).\n````",
+              "createdAt": "2026-11-02T19:11:34Z",
+              "updatedAt": "2026-11-02T19:11:34Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "````suggestion\nThis document provides operational guidance for configuring first-hop routers and first-hop redundancy in IPv6 networks. It also discusses design choices for improving recovery time after a renumbering event.\n````",
+              "createdAt": "2026-11-02T19:11:34Z",
+              "updatedAt": "2026-11-02T19:11:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOVdWlq88AAAABVj9ADQ",
+          "commit": {
+            "abbreviatedOid": "d22d3c0"
+          },
+          "author": "github-actions",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-02T19:13:01Z",
+          "updatedAt": "2026-11-02T19:13:01Z",
+          "comments": [
+            {
+              "originalPosition": 92,
+              "body": "````suggestion\nIt inherits security considerations of IPv6 (see {{RFC9099}}).\n````",
+              "createdAt": "2026-11-02T19:13:01Z",
+              "updatedAt": "2026-11-02T19:13:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOVdWlq88AAAABVj9yYQ",
+          "commit": {
+            "abbreviatedOid": "6565a2d"
+          },
+          "author": "furry13",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "fixing whitespaces",
+          "createdAt": "2026-11-02T19:14:11Z",
+          "updatedAt": "2026-11-02T19:14:11Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOVdWlq88AAAABVkPrOA",
+          "commit": {
+            "abbreviatedOid": "6565a2d"
+          },
+          "author": "oskar456",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Hey, looks good to me. I added some ideas I had inline. Feel free to include them as you find it appropiate.",
+          "createdAt": "2026-11-02T19:36:41Z",
+          "updatedAt": "2026-11-02T20:25:14Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "requiresthat - missing space",
+              "createdAt": "2026-11-02T19:36:42Z",
+              "updatedAt": "2026-11-02T20:25:14Z"
+            },
+            {
+              "originalPosition": 44,
+              "body": "I have drafted something like this, feel free to use it:\r\n\r\n> Unlike IPv4, the IPv6 protocol supports operation with multiple gateways as a native part of the Neigbor Discovery Protocol [RFC4861]. On the other hand, first hop redundancy protocols used in IPv4 like Virtual Router Redundancy Protocol [RFC9568] can be used for IPv6 as well, making the redundant gateways appear as a single logical gateway.\r\n\r\n> This document discusses different options for deploying redundant first-hop\r\nIPv6 gateways to ensure high availability and compatibility with various client\r\nimplementations.",
+              "createdAt": "2026-11-02T19:44:32Z",
+              "updatedAt": "2026-11-02T20:31:08Z"
+            },
+            {
+              "originalPosition": 47,
+              "body": "> First-hop routers face hosts and provide them with information to configure routing as well as well other network parameters, including but not limited to stateless address autoconfiguration, SLAAC {{RFC4861}}.",
+              "createdAt": "2026-11-02T19:46:59Z",
+              "updatedAt": "2026-11-02T20:30:53Z"
+            },
+            {
+              "originalPosition": 71,
+              "body": "> Since the timers are configured locally on each host, it is not possible to influence them from the network side. It is namely not possible to achieve shorter failover time by shortening the Router Lifetime of the active router to a very low value. Not only that leads to frequent sending of Router Advertisements, which has an impact on battery-powered devices {{RFC7772}}, some operating systems are known to ignore routers announced with a very short lifetime.",
+              "createdAt": "2026-11-02T20:01:18Z",
+              "updatedAt": "2026-11-02T20:30:45Z"
+            },
+            {
+              "originalPosition": 32,
+              "body": "RFC7772:",
+              "createdAt": "2026-11-02T20:01:43Z",
+              "updatedAt": "2026-11-02T20:25:14Z"
+            },
+            {
+              "originalPosition": 76,
+              "body": "> Therefore, hosts only see a single high avaliable logical gateway. Because of this, the solution is also useful for hosts with broken IPv6 stacks which cannot correctly process Router Advertisements from multiple independent routers.",
+              "createdAt": "2026-11-02T20:06:18Z",
+              "updatedAt": "2026-11-02T20:30:35Z"
+            },
+            {
+              "originalPosition": 76,
+              "body": "Also, SLAAC is only address configuration method. so rather \"Hosts are provided with the virtual IPv6 address as the default router via Router Advertisements\"",
+              "createdAt": "2026-11-02T20:09:39Z",
+              "updatedAt": "2026-11-02T20:25:15Z"
+            },
+            {
+              "originalPosition": 76,
+              "body": "And finally:\n> It is necessary to make sure that Router Advertisements are only sent from the IPv6 and MAC virtual router address of the currently active router.",
+              "createdAt": "2026-11-02T20:11:57Z",
+              "updatedAt": "2026-11-02T20:25:15Z"
+            },
+            {
+              "originalPosition": 88,
+              "body": "> Similarly to the previous solution, hosts will configure a single high available logical gateway using Router Advertisements.",
+              "createdAt": "2026-11-02T20:13:43Z",
+              "updatedAt": "2026-11-02T20:31:31Z"
+            },
+            {
+              "originalPosition": 92,
+              "body": "Maybe call it \"Routing return traffic back to hosts\" to make it more clear?",
+              "createdAt": "2026-11-02T20:15:56Z",
+              "updatedAt": "2026-11-02T20:25:14Z"
+            },
+            {
+              "originalPosition": 94,
+              "body": "> All redundant gateways must correctly forward packets destined to the subnet where hosts are connected, usually by means of an Internal Gateway Protocol (IGP). By default, this might lead to a routing asymmetry where return traffic uses different gateway from the forward traffic. This is not a problem, unless some stateful processing like firewall rules or connection tracking takes place on the gateways.\r\n\r\n> If routing asymmetry is not desirable and gateways are operated in active-standby mode, symmetric routing can be achieved by influencing the route metric of the active gateway announced in the IGP together with failover.",
+              "createdAt": "2026-11-02T20:24:16Z",
+              "updatedAt": "2026-11-02T20:31:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOVdWlq88AAAABVloglA",
+          "commit": {
+            "abbreviatedOid": "2182298"
+          },
+          "author": "furry13",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-02T21:36:54Z",
+          "updatedAt": "2026-11-02T21:36:54Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "Done.",
+              "createdAt": "2026-11-02T21:36:54Z",
+              "updatedAt": "2026-11-02T21:36:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOVdWlq88AAAABVlpYig",
+          "commit": {
+            "abbreviatedOid": "2182298"
+          },
+          "author": "furry13",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-02T21:37:51Z",
+          "updatedAt": "2026-11-02T21:37:51Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "Thank you, added.",
+              "createdAt": "2026-11-02T21:37:51Z",
+              "updatedAt": "2026-11-02T21:37:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOVdWlq88AAAABVlqG_Q",
+          "commit": {
+            "abbreviatedOid": "2182298"
+          },
+          "author": "furry13",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-02T21:38:36Z",
+          "updatedAt": "2026-11-02T21:38:36Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "Done, fixed.",
+              "createdAt": "2026-11-02T21:38:36Z",
+              "updatedAt": "2026-11-02T21:38:36Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
