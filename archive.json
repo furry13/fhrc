@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-03T05:25:35.589324+00:00",
+  "timestamp": "2026-11-05T05:13:02.579337+00:00",
   "repo": "furry13/fhrc",
   "labels": [
     {
@@ -54,7 +54,39 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOVdWlq88AAAABcE5E1Q",
+      "title": "Mention RFC 8028: First-Hop Router Selection by Hosts in a Multi-Prefix Network",
+      "url": "https://github.com/furry13/fhrc/issues/2",
+      "state": "OPEN",
+      "author": "oskar456",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Suggested by Brian Carpenter",
+      "createdAt": "2026-11-03T08:41:43Z",
+      "updatedAt": "2026-11-04T12:06:35Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "furry13",
+          "authorAssociation": "OWNER",
+          "body": "We should mention that our document is not nessesary for multi-prefix, so in case when all routers advertize the same set of prefixes, RFC8028 support is not so critical",
+          "createdAt": "2026-11-04T11:21:02Z",
+          "updatedAt": "2026-11-04T11:21:02Z"
+        },
+        {
+          "author": "oskar456",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree that it is not necessary to be mentioned, but maybe it might be beneficial to mention this in the introduction to establish the scope of the document that is: A single network having multiple router which all offer the same network prefix and are maintained by the same party.\n\nI will have a look whether this makes sense or not.",
+          "createdAt": "2026-11-04T12:06:34Z",
+          "updatedAt": "2026-11-04T12:06:34Z"
+        }
+      ]
+    }
+  ],
   "pulls": [
     {
       "number": 1,
